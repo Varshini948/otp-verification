@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OTP Verification System</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.container{
+    width:350px;
+    background:#fff;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 0 20px rgba(0,0,0,0.2);
+    text-align:center;
+}
+
+h2{
+    color:#333;
+    margin-bottom:20px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:8px;
+    outline:none;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    background:#4CAF50;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    background:#388E3C;
+}
+
+#message{
+    margin-top:15px;
+    font-weight:bold;
+}
+
+#otpDisplay{
+    margin-top:15px;
+    color:blue;
+    font-weight:bold;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h2>OTP Verification</h2>
+
+<input type="email" id="email" placeholder="Enter Email">
+
+<button onclick="sendOTP()">Generate OTP</button>
+
+<div id="otpDisplay"></div>
+
+<input type="text" id="otp" placeholder="Enter OTP">
+
+<button onclick="verifyOTP()">Verify OTP</button>
+
+<p id="message"></p>
+
+</div>
+
+<script>
+
+let generatedOTP="";
+
+function sendOTP(){
+
+let email=document.getElementById("email").value;
+
+if(email==""){
+alert("Please enter email");
+return;
+}
+
+generatedOTP=Math.floor(100000+Math.random()*900000);
+
+// Demo only (normally sent by email/SMS)
+document.getElementById("otpDisplay").innerHTML=
+"Generated OTP: <b>"+generatedOTP+"</b>";
+
+document.getElementById("message").style.color="blue";
+document.getElementById("message").innerHTML=
+"OTP Generated Successfully";
+
+}
+
+function verifyOTP(){
+
+let enteredOTP=document.getElementById("otp").value;
+
+if(enteredOTP==""){
+alert("Enter OTP");
+return;
+}
+
+if(enteredOTP==generatedOTP){
+document.getElementById("message").style.color="green";
+document.getElementById("message").innerHTML=
+"✅ OTP Verified Successfully";
+}
+else{
+document.getElementById("message").style.color="red";
+document.getElementById("message").innerHTML=
+"❌ Invalid OTP";
+}
+
+}
+
+</script>
+
+</body>
+</html>
